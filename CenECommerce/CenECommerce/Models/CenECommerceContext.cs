@@ -24,6 +24,10 @@
 
         public DbSet<Company> Companies { get; set; }
 
-        public System.Data.Entity.DbSet<CenECommerce.Models.User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public System.Data.Entity.DbSet<CenECommerce.Models.Tax> Taxes { get; set; }
     }
 }

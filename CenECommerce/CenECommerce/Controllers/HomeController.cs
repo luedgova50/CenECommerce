@@ -1,16 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace CenECommerce.Controllers
+﻿namespace CenECommerce.Controllers
 {
+    
+    using System.Linq;
+    using System.Web.Mvc;
+    using CenECommerce.Models;
+
     public class HomeController : Controller
     {
+        private CenECommerceContext dab = new CenECommerceContext();
+
         public ActionResult Index()
         {
-            return View();
+            var user =
+                dab.Users.Where(
+                us => us.UserName == User.Identity.Name).
+                FirstOrDefault();
+
+            return View(user);
         }
 
         public ActionResult About()

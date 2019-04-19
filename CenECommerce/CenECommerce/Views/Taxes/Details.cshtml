@@ -1,0 +1,47 @@
+﻿@model CenECommerce.Models.Tax
+
+@{
+    ViewBag.Title = "Taxes";
+}
+
+<div>
+    <div class="col-mod-8">
+        <h2>Details Category</h2>
+        <img src="~/Images/Forms/details.png" height="180" width="200" />
+    </div>
+</div>
+
+<div>
+    <h4>Tax</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.NameCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.NameCompany)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit Records", "Edit", new { id = Model.TaxId }, new { @class = "btn btn-warning btn-lg" })
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-success btn-lg" })
+</p>
