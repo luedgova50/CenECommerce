@@ -1,0 +1,72 @@
+﻿@model CenECommerce.Models.State
+
+@{
+    ViewBag.Title = "States";
+}
+
+<div>
+    <div class="col-mod-8">
+        <h2>Create State</h2>
+        <img src="~/Images/Forms/create.png" height="180" width="200" />
+    </div>
+</div>
+
+
+@using (Html.BeginForm("Create", "States", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>State</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.NameState, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+            @Html.EditorFor(model => model.NameState, new { htmlAttributes = new { @class = "form-control", placeholder = "Huila" } })
+            @Html.ValidationMessageFor(model => model.NameState, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CodeState, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-sound-7-1"></i></span>
+            @Html.EditorFor(model => model.CodeState, new { htmlAttributes = new { @class = "form-control", placeholder = "41" } })
+            @Html.ValidationMessageFor(model => model.CodeState, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FlagFile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+            <span class="btn btn-primary btn-lg btn-file">
+                @Html.TextBoxFor(modelo => modelo.FlagFile, new { type = "file" })
+            </span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShieldFile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+            <span class="btn btn-primary btn-lg btn-file">
+                @Html.TextBoxFor(modelo => modelo.ShieldFile, new { type = "file" })
+            </span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create Record" class="btn btn-primary btn-lg" />
+            @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-success btn-lg" })
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

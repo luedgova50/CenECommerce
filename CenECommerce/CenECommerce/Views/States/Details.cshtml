@@ -1,0 +1,61 @@
+﻿@model CenECommerce.Models.State
+
+@{
+    ViewBag.Title = "States";
+}
+
+<h2>Details</h2><div>
+    <div class="col-mod-8">
+        <h2>Details State</h2>
+        <img src="~/Images/Forms/details.png" height="180" width="200" />
+    </div>
+</div>
+
+<div>
+    <h4>State</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NameState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodeState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodeState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Flag)
+        </dt>
+
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.Flag))
+            {
+                <img src="@Url.Content(Model.Flag)" alt="Image" style="width:150px;height:150px;max-width: 100%; height: auto;" />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shield)
+        </dt>
+
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.Shield))
+            {
+                <img src="@Url.Content(Model.Shield)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit Records", "Edit", new { id = Model.StateId }, new { @class = "btn btn-warning btn-lg" })
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-success btn-lg" })
+</p>
