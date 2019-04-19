@@ -10,6 +10,7 @@
     using CenECommerce.Models;
     using PagedList;
 
+    [Authorize(Roles = "Admin")]
     public class CitiesController : Controller
     {
         private CenECommerceContext db = new CenECommerceContext();

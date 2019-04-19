@@ -50,22 +50,22 @@
                      ToList();
         }
 
-        //public static List<Company> GetCompanies()
-        //{
-        //    var companies = db.Companies.ToList();
+        public static List<Company> GetCompanies()
+        {
+            var companies = db.Companies.ToList();
 
-        //    companies.Add(new Company
-        //    {
-        //        CompanyId = 0,
-        //        NameCompany = "[---Select a Company...---]"
-        //    });
+            companies.Add(new Company
+            {
+                CompanyId = 0,
+                NameCompany = "[---Select a Company...---]"
+            });
 
-        //    return companies =
-        //             companies.
-        //             OrderBy(
-        //             c => c.NameCompany).
-        //             ToList();
-        //}
+            return companies =
+                     companies.
+                     OrderBy(
+                     c => c.NameCompany).
+                     ToList();
+        }
 
     }
 }

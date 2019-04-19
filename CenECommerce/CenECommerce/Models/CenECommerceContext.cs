@@ -23,5 +23,7 @@
         public DbSet<City> Cities { get; set; }
 
         public DbSet<Company> Companies { get; set; }
+
+        public System.Data.Entity.DbSet<CenECommerce.Models.User> Users { get; set; }
     }
 }

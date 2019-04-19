@@ -1,0 +1,130 @@
+﻿@model CenECommerce.Models.User
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<div>
+    <div class="col-mod-8">
+        <h2>Details State</h2>
+        <img src="~/Images/Forms/details.png" height="180" width="200" />
+    </div>
+</div>
+
+<div>
+    <h4>User</h4>
+    <hr />    
+    <div class="row">
+        <div class="col-sm-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.City.NameCity)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City.NameCity)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Company.NameCompany)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Company.NameCompany)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State.NameState)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State.NameState)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Mobile01)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Mobile01)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Mobile02)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Mobile02)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-sm-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Photo)
+                </dt>
+
+                <dd>
+                    @if (!string.IsNullOrEmpty(Model.Photo))
+                    {
+                        <img src="@Url.Content(Model.Photo)" alt="Image" style="width:150px;height:150px;max-width: 100%; height: auto;" />
+                    }
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PostalCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PostalCode)
+                </dd>
+            </dl>
+                <p>
+                    @Html.ActionLink("Edit Records", "Edit", new { id = Model.UserID }, new { @class = "btn btn-warning btn-lg" })
+                    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-success btn-lg" })
+                </p>
+        </div>
+    </div>
+</div>
+

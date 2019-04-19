@@ -1,8 +1,5 @@
 ﻿namespace CenECommerce.Controllers
-{
-
-    
-    
+{    
     using System;
     using System.Data.Entity;
     using System.Net;
@@ -12,6 +9,7 @@
     using CenECommerce.Models;
     using PagedList;
 
+    [Authorize(Roles = "Admin")]
     public class StatesController : Controller
     {
         private CenECommerceContext db = new CenECommerceContext();
