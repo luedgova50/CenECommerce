@@ -194,9 +194,11 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\PurchaseStatusController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\TaxesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -210,10 +212,12 @@
     <Compile Include="Models\CenECommerceContext.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\PurchaseStatus.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Tax.cs" />
     <Compile Include="Models\User.cs" />
@@ -316,6 +320,7 @@
     <Content Include="Images\Forms\impuestos.jfif" />
     <Content Include="Images\Forms\order.jpg" />
     <Content Include="Images\Forms\products.jpg" />
+    <Content Include="Images\Forms\purchaseStatus.jpg" />
     <Content Include="Images\Forms\suppliers.jpg" />
     <Content Include="Images\Forms\users.jpg" />
     <Content Include="Scripts\bootstrap.js" />
@@ -405,11 +410,22 @@
     <Content Include="Views\WareHouses\Details.cshtml" />
     <Content Include="Views\WareHouses\Edit.cshtml" />
     <Content Include="Views\WareHouses\Index.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\PurchaseStatus\Create.cshtml" />
+    <Content Include="Views\PurchaseStatus\Delete.cshtml" />
+    <Content Include="Views\PurchaseStatus\Details.cshtml" />
+    <Content Include="Views\PurchaseStatus\Edit.cshtml" />
+    <Content Include="Views\PurchaseStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Cities\FlagsCities\" />
     <Folder Include="Content\Cities\ShieldsCities\" />
+    <Folder Include="Content\Customers\" />
     <Folder Include="Content\Logos\" />
     <Folder Include="Content\Photos\" />
     <Folder Include="Content\Products\" />

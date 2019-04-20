@@ -1,36 +1,37 @@
-﻿@model CenECommerce.Models.WareHouse
+﻿@model CenECommerce.Models.Customer
 
 @{
-    ViewBag.Title = "WareHouses";
+    ViewBag.Title = "Customers";
 }
 
 <div>
     <div class="col-mod-8">
-        <h2>Create WareHouse</h2>
-        <img src="~/Images/Forms/create.png" height="180" width="200" />
+        <h2>Edit Customer</h2>
+        <img src="~/Images/Forms/edit.png" height="180" width="200" />
     </div>
 </div>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Edit", "Customers", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
-    <h4>WareHouse</h4>
+    <h4>Customer</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CustomerID)
     @Html.HiddenFor(model => model.CompanyId)
+    @Html.HiddenFor(model => model.LogoC)
 
- </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Bodega Sur" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -38,7 +39,7 @@
                 @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Luis Eduardo" } })
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -47,17 +48,8 @@
                 @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Gonzàlez Vargas" } })
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10 input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "bodegasur@maquitextiles.com" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -65,7 +57,7 @@
                 @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "0988363168" } })
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -74,18 +66,46 @@
                 @Html.LabelFor(model => model.Mobile01, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                    @Html.EditorFor(model => model.Mobile01, new { htmlAttributes = new { @class = "form-control", placeholder = "3133532295" } })
+                    @Html.EditorFor(model => model.Mobile01, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Mobile01, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6">
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Mobile02, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                    @Html.EditorFor(model => model.Mobile02, new { htmlAttributes = new { @class = "form-control", placeholder = "3158320146" } })
+                    @Html.EditorFor(model => model.Mobile02, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Mobile02, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group">
+                @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                    @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LogoCFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
+                    <span class="btn btn-primary btn-lg btn-file">
+                        @Html.TextBoxFor(modelo => modelo.LogoCFile, new { type = "file" })
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -111,18 +131,19 @@
                 @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10 input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-sound-6-1"></i></span>
-                    @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control", placeholder = "417030" } })
+                    @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create Record" class="btn btn-primary btn-lg" />
+                    <input type="submit" value="Save Record" class="btn btn-primary btn-lg" />
                     @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-success btn-lg" })
                 </div>
             </div>
         </div>
+    </div>
 </div>
 }
 
@@ -131,28 +152,28 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-            $(document).ready(function () {
-                $("#StateId").change(function () {
-                    $("#CityId").empty();
-                    $("#CityId").append('<option value="0">[Select a City...]</option>');
-                    $.ajax({
-                        type: 'POST',
-                        url: '@Url.Action("GetCities")',
-                        dataType: 'json',
-                        data: { stateId: $("#StateId").val() },
-                        success: function (data) {
-                            $.each(data, function (i, data) {
-                                $("#CityId").append('<option value="'
-                                    + data.CityId + '">'
-                                    + data.NameCity + '</option>');
-                            });
-                        },
-                        error: function (ex) {
-                            alert('Failed to retrieve cities.' + ex);
-                        }
-                    });
-                    return false;
-                })
-            });
+                $(document).ready(function () {
+                    $("#StateId").change(function () {
+                        $("#CityId").empty();
+                        $("#CityId").append('<option value="0">[Select a City...]</option>');
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("GetCities")',
+                            dataType: 'json',
+                            data: { stateId: $("#StateId").val() },
+                            success: function (data) {
+                                $.each(data, function (i, data) {
+                                    $("#CityId").append('<option value="'
+                                        + data.CityId + '">'
+                                        + data.NameCity + '</option>');
+                                });
+                            },
+                            error: function (ex) {
+                                alert('Failed to retrieve cities.' + ex);
+                            }
+                        });
+                        return false;
+                    })
+                });
     </script>
 }

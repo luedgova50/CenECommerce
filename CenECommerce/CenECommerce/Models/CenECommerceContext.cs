@@ -35,5 +35,9 @@
         public DbSet<WareHouse> WareHouses { get; set; }
 
         public DbSet<Inventory> Inventories { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<PurchaseStatus> PurchaseStatus { get; set; }
     }
 }

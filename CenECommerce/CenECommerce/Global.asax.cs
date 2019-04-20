@@ -43,6 +43,8 @@
 
             UsersHelpers.CheckRole("User");
 
+            UsersHelpers.CheckRole("Customer");
+
             UsersHelpers.CheckSuperUser();
         }
     }
