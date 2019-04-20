@@ -28,6 +28,10 @@
 
         public DbSet<Category> Categories { get; set; }
 
-        public System.Data.Entity.DbSet<CenECommerce.Models.Tax> Taxes { get; set; }
+        public DbSet<Tax> Taxes { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public System.Data.Entity.DbSet<CenECommerce.Models.WareHouse> WareHouses { get; set; }
     }
 }

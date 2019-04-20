@@ -67,5 +67,45 @@
                      ToList();
         }
 
+        public static List<Category> GetCategories(int companyId)
+        {
+            var categories = 
+                db.Categories.
+                Where(ct => ct.CompanyId == companyId)
+                .ToList();
+
+            categories.Add(new Category
+            {
+                CategoryId = 0,
+                Description = "[---Select a Category...---]"
+            });
+
+            return categories =
+                     categories.
+                     OrderBy(
+                     ct => ct.Description).
+                     ToList();
+        }
+
+        public static List<Tax> GetTaxes(int companyId)
+        {
+            var taxes =
+        db.Taxes.
+            Where(ct => ct.CompanyId == companyId).
+            ToList();
+
+            taxes.Add(new Tax
+            {
+                TaxId = 0,
+                Description = "[---Select a Rate...---]"
+            });
+
+            return taxes =
+                     taxes.
+                     OrderBy(
+                     tx => tx.Description).
+                     ToList();
+        }
+
     }
 }
