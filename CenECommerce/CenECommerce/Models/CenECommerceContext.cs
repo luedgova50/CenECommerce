@@ -32,6 +32,8 @@
 
         public DbSet<Product> Products { get; set; }
 
-        public System.Data.Entity.DbSet<CenECommerce.Models.WareHouse> WareHouses { get; set; }
+        public DbSet<WareHouse> WareHouses { get; set; }
+
+        public DbSet<Inventory> Inventories { get; set; }
     }
 }

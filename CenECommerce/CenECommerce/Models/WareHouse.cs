@@ -1,5 +1,6 @@
 ﻿namespace CenECommerce.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -83,5 +84,7 @@
         public virtual City City { get; set; }
 
         public virtual Company Company { get; set; }
+
+        public virtual ICollection<Inventory> Inventories { get; set; }
     }
 }

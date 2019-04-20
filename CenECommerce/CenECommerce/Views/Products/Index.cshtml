@@ -30,6 +30,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Image)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Stock)
+        </th>
         <th></th>
     </tr>
 
@@ -50,7 +53,10 @@
                 {
                     <img src="@Url.Content(item.Image)" alt="Image" style="width:150px;height:250px;max-width: 100%; height: auto;" />
                 }
-            </td>            
+            </td> 
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-warning btn-lg" })
                 @Html.ActionLink("Details", "Details", new { id = item.ProductID }, new { @class = "btn btn-info btn-lg" })
