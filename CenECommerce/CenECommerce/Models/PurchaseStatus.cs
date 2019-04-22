@@ -1,5 +1,6 @@
 ﻿namespace CenECommerce.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,6 @@
         [Index("PurchaseStatus_Description_Index", IsUnique = true)]
         public string Description { get; set; }
 
-
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

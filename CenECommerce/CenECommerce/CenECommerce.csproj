@@ -187,16 +187,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\ComboBoxHelpers.cs" />
+    <Compile Include="Classes\DBHelpers.cs" />
     <Compile Include="Classes\FilesHelpers.cs" />
     <Compile Include="Classes\MailHelpers.cs" />
+    <Compile Include="Classes\MovementHelpers.cs" />
     <Compile Include="Classes\UsersHelpers.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PurchaseStatusController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
@@ -208,6 +212,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddProductView.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CenECommerceContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -216,8 +221,13 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NewOrderView.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\OrderDetailTmp.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\PurchaseStatus.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Tax.cs" />
     <Compile Include="Models\User.cs" />
@@ -226,6 +236,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -306,6 +318,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Forms\addproduct.png" />
     <Content Include="Images\Forms\almacenamiento.jpg" />
     <Content Include="Images\Forms\categorias.jpg" />
     <Content Include="Images\Forms\cities.jpg" />
@@ -319,13 +332,18 @@
     <Content Include="Images\Forms\edit.png" />
     <Content Include="Images\Forms\impuestos.jfif" />
     <Content Include="Images\Forms\order.jpg" />
+    <Content Include="Images\Forms\order01.png" />
     <Content Include="Images\Forms\products.jpg" />
     <Content Include="Images\Forms\purchaseStatus.jpg" />
     <Content Include="Images\Forms\suppliers.jpg" />
     <Content Include="Images\Forms\users.jpg" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\CenECommerce.js" />
+    <Content Include="Scripts\FileUpload.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -336,6 +354,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -420,6 +442,12 @@
     <Content Include="Views\PurchaseStatus\Details.cshtml" />
     <Content Include="Views\PurchaseStatus\Edit.cshtml" />
     <Content Include="Views\PurchaseStatus\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\AddProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -429,6 +457,7 @@
     <Folder Include="Content\Logos\" />
     <Folder Include="Content\Photos\" />
     <Folder Include="Content\Products\" />
+    <Folder Include="Views\Generic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

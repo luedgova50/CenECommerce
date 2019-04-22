@@ -39,5 +39,11 @@
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<PurchaseStatus> PurchaseStatus { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        public DbSet<OrderDetailTmp> OrderDetailTmps { get; set; }
     }
 }

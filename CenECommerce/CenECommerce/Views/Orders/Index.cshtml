@@ -1,0 +1,65 @@
+﻿@model PagedList.IPagedList<CenECommerce.Models.Order>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Orders";
+}
+
+<div class="col-mod-8">
+    <h2>List of Products</h2>
+    <img src="~/Images/Forms/order01.png" height="150" width="250" />
+</div>
+
+<p>
+    @Html.ActionLink("Create New Record", "Create", new { }, new { @class = "btn btn-primary btn-lg" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Customer.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().PurchaseStatus.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DateOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Remarks)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseStatus.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.OrderId }, new { @class = "btn btn-warning btn-lg" })
+                @Html.ActionLink("Details", "Details", new { id = item.OrderId }, new { @class = "btn btn-info btn-lg" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.OrderId }, new { @class = "btn btn-danger btn-lg" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+Página: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber), de: @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    sortOrder =
+    ViewBag.CurrentSort,
+    currentFilter = ViewBag.CurrentFilter
+}))

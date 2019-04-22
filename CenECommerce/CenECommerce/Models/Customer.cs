@@ -1,5 +1,6 @@
 ﻿namespace CenECommerce.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web;
@@ -99,7 +100,7 @@
 
         public virtual Company Company { get; set; }
 
-
+        public virtual ICollection<Order> Orders { get; set; }
 
 
     }

@@ -107,5 +107,45 @@
                      ToList();
         }
 
+        public static List<Customer> GetCustomers(int companyId)
+        {
+            var customers =
+                db.Customers.
+                    Where(ct => ct.CompanyId == companyId).
+                    ToList();
+
+            customers.Add(new Customer
+            {
+                CustomerID = 0,
+                FirstName = "[---Select a Customer...---]"
+            });
+
+            return customers.
+                     OrderBy(
+                     tx => tx.FirstName).
+                     ThenBy(
+                         tx => tx.LastName).
+                     ToList();
+        }
+
+        public static List<Product> GetProducts(int companyId)
+        {
+            var products =
+                db.Products.
+                    Where(ct => ct.CompanyId == companyId).
+                    ToList();
+
+            products.Add(new Product
+            {
+                ProductID = 0,
+                Description = "[---Select a Product...---]"
+            });
+
+            return products.
+                     OrderBy(
+                     tx => tx.Description).
+                     ToList();
+        }
+
     }
 }
