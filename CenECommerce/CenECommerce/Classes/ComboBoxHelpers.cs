@@ -33,9 +33,12 @@
                      ToList();
         }
 
-        public static List<City> GetCities()
+        public static List<City> GetCities(int stateId)
         {
-            var cities = db.Cities.ToList();
+            var cities = db.Cities.
+                Where(
+                c => c.StateId == stateId).
+                ToList();
 
             cities.Add(new City
             {

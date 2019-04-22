@@ -61,10 +61,10 @@
             {
                 db.States.Add(state);
 
-                try
-                {
-                    db.SaveChanges();
+                var response = DBHelpers.SaveChanges(db);
 
+                if (response.Succeeded)
+                {
                     if (state.FlagFile != null)
                     {
                         var folder = "~/Content/Flags";
@@ -72,13 +72,13 @@
                         var file = string.Format("{0}.jpg",
                            state.StateId);
 
-                        var response =
+                        var response0 =
                             FilesHelpers.
                             UploadPhoto(
                             state.FlagFile,
                             folder, file);
 
-                        if (response)
+                        if (response0)
                         {
                             var pic =
                              string.Format("{0}/{1}",
@@ -93,59 +93,40 @@
                             db.SaveChanges();
                         }
                     }
-                        if (state.ShieldFile != null)
+
+                    if (state.ShieldFile != null)
+                    {
+                        var folder1 = "~/Content/Shields";
+
+                        var file1 = string.Format("{0}.jpg",
+                           state.StateId);
+
+                        var response1 =
+                            FilesHelpers.
+                            UploadPhoto(
+                            state.ShieldFile,
+                            folder1, file1);
+
+                        if (response1)
                         {
-                            var folder1 = "~/Content/Shields";
+                            var pic =
+                             string.Format("{0}/{1}",
+                             folder1,
+                             file1);
 
-                            var file1 = string.Format("{0}.jpg",
-                               state.StateId);
+                            state.Shield = pic;
 
-                            var response1 =
-                                FilesHelpers.
-                                UploadPhoto(
-                                state.ShieldFile,
-                                folder1, file1);
+                            db.Entry(state).State =
+                                EntityState.Modified;
 
-                            if (response1)
-                            {
-                                var pic =
-                                 string.Format("{0}/{1}",
-                                 folder1,
-                                 file1);
-
-                                state.Shield = pic;
-
-                                db.Entry(state).State =
-                                    EntityState.Modified;
-
-                                db.SaveChanges();
-                            }
+                            db.SaveChanges();
                         }
-
+                    }
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException.Message.
-                                        Contains("_Index"))
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            "You Can't Add a New Record, Because There is Already One");
-                    }
-                    else
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            ex.Message);
-                    }
-                }
+
+                ModelState.AddModelError(
+                    string.Empty, response.Message);                
             }
 
             return View(state);
@@ -190,14 +171,14 @@
                         string.Format("{0}.jpg", 
                         state.StateId);
 
-                    var response =
+                    var response0 =
                         FilesHelpers.
                         UploadPhoto(
                         state.FlagFile,
                         folder,
                         file);
 
-                    if (response)
+                    if (response0)
                     {
                         pic = 
                             string.Format("{0}/{1}", 
@@ -219,14 +200,14 @@
                         string.Format("{0}.jpg",
                         state.StateId);
 
-                    var response =
+                    var response1 =
                         FilesHelpers.
                         UploadPhoto(
                         state.FlagFile,
                         folder1,
                         file1);
 
-                    if (response)
+                    if (response1)
                     {
                         pic =
                             string.Format("{0}/{1}",
@@ -241,34 +222,15 @@
                 db.Entry(state).State =
                     EntityState.Modified;
 
-                try
-                {
-                    db.SaveChanges();
+                var response = DBHelpers.SaveChanges(db);
 
+                if (response.Succeeded)
+                {
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException.Message.
-                                        Contains("_Index"))
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            "You Can't Add a New Record, Because There is Already One");
-                    }
-                    else
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            ex.Message);
-                    }
-                }
+
+                ModelState.AddModelError(
+                    string.Empty, response.Message);
             }
 
             return View(state);
@@ -302,35 +264,15 @@
 
             db.States.Remove(state);
 
-            try
-            {
-                db.SaveChanges();
+            var response = DBHelpers.SaveChanges(db);
 
+            if (response.Succeeded)
+            {
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null &&
-                    ex.InnerException.
-                    InnerException != null &&
-                    ex.InnerException.
-                    InnerException.Message.
-                    Contains("REFERENCE"))
-                {
-                    ModelState.
-                        AddModelError(
-                        string.Empty,
-                        "The Selected Record can't be Deleted, "
-                        + " Because it Already Contains Related Records");
-                }
-                else
-                {
-                    ModelState.
-                        AddModelError(
-                        string.Empty,
-                        ex.Message);
-                }
-            }
+
+            ModelState.AddModelError(
+                string.Empty, response.Message);
 
             return View(state);
         }

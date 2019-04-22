@@ -111,10 +111,10 @@
             {
                 db.Products.Add(product);
 
-                try
-                {
-                    db.SaveChanges();
+                var response = DBHelpers.SaveChanges(db);
 
+                if (response.Succeeded)
+                {
                     if (product.ImageFile != null)
                     {
                         var folder = "~/Content/Products";
@@ -146,28 +146,9 @@
 
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException.Message.
-                                        Contains("_Index"))
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            "You Can't Add a New Record, Because There is Already One");
-                    }
-                    else
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            ex.Message);
-                    }
-                }
+
+                ModelState.AddModelError(
+                    string.Empty, response.Message);                
             }
 
             ViewBag.CategoryId = 
@@ -257,50 +238,31 @@
 
                     var file = string.Format("{0}.jpg", product.ProductID);
 
-                    var response =
+                    var response0 =
                         FilesHelpers.
                         UploadPhoto(
                         product.ImageFile,
                         folder,
                         file);
 
-                    if (response)
+                    if (response0)
                     {
                         pic = string.Format("{0}/{1}", folder, product.ProductID);
 
                         product.Image = pic;
                     }
 
-                } 
+                }
 
-                try
+                var response = DBHelpers.SaveChanges(db);
+
+                if (response.Succeeded)
                 {
-                    db.SaveChanges();
-
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException.Message.
-                                        Contains("_Index"))
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            "You Can't Add a New Record, Because There is Already One");
-                    }
-                    else
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            ex.Message);
-                    }
-                }
+
+                ModelState.AddModelError(
+                    string.Empty, response.Message);
             }
 
             ViewBag.CategoryId = 
@@ -352,35 +314,15 @@
 
             db.Products.Remove(product);
 
-            try
-            {
-                db.SaveChanges();
+            var response = DBHelpers.SaveChanges(db);
 
+            if (response.Succeeded)
+            {
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null &&
-                    ex.InnerException.
-                    InnerException != null &&
-                    ex.InnerException.
-                    InnerException.Message.
-                    Contains("REFERENCE"))
-                {
-                    ModelState.
-                        AddModelError(
-                        string.Empty,
-                        "The Selected Record can't be Deleted, "
-                        + " Because it Already Contains Related Records");
-                }
-                else
-                {
-                    ModelState.
-                        AddModelError(
-                        string.Empty,
-                        ex.Message);
-                }
-            }
+
+            ModelState.AddModelError(
+                string.Empty, response.Message);
 
             return View(product);
         }

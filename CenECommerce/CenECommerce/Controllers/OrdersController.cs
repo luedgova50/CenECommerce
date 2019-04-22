@@ -257,29 +257,34 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+
+            var order = db.Orders.Find(id);
+
             if (order == null)
             {
                 return HttpNotFound();
             }
+
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerID", "UserName", order.CustomerId);
             ViewBag.PurchaseStatusId = new SelectList(db.PurchaseStatus, "PurchaseStatusId", "Description", order.PurchaseStatusId);
             return View(order);
         }
 
         // POST: Orders/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderId,CustomerId,PurchaseStatusId,DateOrder,Remarks")] Order order)
+        public ActionResult Edit(Order order)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
+                db.Entry(order).State = 
+                    EntityState.Modified;
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
+
             ViewBag.CustomerId = new SelectList(db.Customers, "CustomerID", "UserName", order.CustomerId);
             ViewBag.PurchaseStatusId = new SelectList(db.PurchaseStatus, "PurchaseStatusId", "Description", order.PurchaseStatusId);
             return View(order);
@@ -292,11 +297,14 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+
+            var order = db.Orders.Find(id);
+
             if (order == null)
             {
                 return HttpNotFound();
             }
+
             return View(order);
         }
 
@@ -305,10 +313,21 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Orders.Find(id);
+            var order = db.Orders.Find(id);
+
             db.Orders.Remove(order);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+            var response = DBHelpers.SaveChanges(db);
+
+            if (response.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError(
+                string.Empty, response.Message);
+
+            return View(order);
         }
 
         protected override void Dispose(bool disposing)
@@ -317,6 +336,7 @@
             {
                 db.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

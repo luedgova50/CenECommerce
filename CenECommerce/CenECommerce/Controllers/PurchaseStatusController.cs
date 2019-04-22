@@ -8,6 +8,7 @@ namespace CenECommerce.Controllers
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
+    using CenECommerce.Classes;
     using CenECommerce.Models;
     using PagedList;
 
@@ -65,34 +66,15 @@ namespace CenECommerce.Controllers
                 db.PurchaseStatus.
                     Add(purchaseStatus);
 
-                try
-                {
-                    db.SaveChanges();
+                var response = DBHelpers.SaveChanges(db);
 
+                if (response.Succeeded)
+                {
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException.Message.
-                                        Contains("_Index"))
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            "You Can't Add a New Record, Because There is Already One");
-                    }
-                    else
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            ex.Message);
-                    }
-                }
+
+                ModelState.AddModelError(
+                    string.Empty, response.Message);
             }
 
             return View(purchaseStatus);
@@ -128,34 +110,15 @@ namespace CenECommerce.Controllers
                 db.Entry(purchaseStatus).
                     State = EntityState.Modified;
 
-                try
-                {
-                    db.SaveChanges();
+                var response = DBHelpers.SaveChanges(db);
 
+                if (response.Succeeded)
+                {
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException.Message.
-                                        Contains("_Index"))
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            "You Can't Add a New Record, Because There is Already One");
-                    }
-                    else
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            ex.Message);
-                    }
-                }
+
+                ModelState.AddModelError(
+                    string.Empty, response.Message);
             }
 
             return View(purchaseStatus);
@@ -192,35 +155,15 @@ namespace CenECommerce.Controllers
             db.PurchaseStatus.
                 Remove(purchaseStatus);
 
-            try
-            {
-                db.SaveChanges();
+            var response = DBHelpers.SaveChanges(db);
 
+            if (response.Succeeded)
+            {
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null &&
-                    ex.InnerException.
-                    InnerException != null &&
-                    ex.InnerException.
-                    InnerException.Message.
-                    Contains("REFERENCE"))
-                {
-                    ModelState.
-                        AddModelError(
-                        string.Empty,
-                        "The Selected Record can't be Deleted, "
-                        + " Because it Already Contains Related Records");
-                }
-                else
-                {
-                    ModelState.
-                        AddModelError(
-                        string.Empty,
-                        ex.Message);
-                }
-            }
+
+            ModelState.AddModelError(
+                string.Empty, response.Message);
 
             return View(purchaseStatus);
         }

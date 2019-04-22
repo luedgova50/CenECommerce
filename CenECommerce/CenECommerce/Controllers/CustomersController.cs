@@ -74,7 +74,7 @@
             ViewBag.CityId = 
                 new SelectList(
                     ComboBoxHelpers.
-                    GetCities(), 
+                    GetCities(0), 
                     "CityId", 
                     "NameCity");
            
@@ -108,10 +108,10 @@
             {
                 db.Customers.Add(customer);
 
-                try
-                {
-                    db.SaveChanges();
+                var response = DBHelpers.SaveChanges(db);
 
+                if (response.Succeeded)
+                {
                     if (customer.LogoCFile != null)
                     {
                         var folder = "~/Content/Customers";
@@ -119,13 +119,13 @@
                         var file = string.Format("{0}.jpg",
                            customer.CustomerID);
 
-                        var response =
+                        var response0 =
                             FilesHelpers.
                             UploadPhoto(
                             customer.LogoCFile,
                             folder, file);
 
-                        if (response)
+                        if (response0)
                         {
                             var pic =
                              string.Format("{0}/{1}",
@@ -143,34 +143,15 @@
 
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException.Message.
-                                        Contains("_Index"))
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            "You Can't Add a New Record, Because There is Already One");
-                    }
-                    else
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            ex.Message);
-                    }
-                }
+
+                ModelState.AddModelError(
+                    string.Empty, response.Message);               
             }
 
             ViewBag.CityId = 
                 new SelectList(
                     ComboBoxHelpers.
-                    GetCities(), 
+                    GetCities(customer.StateId), 
                     "CityId", 
                     "NameCity", 
                     customer.CityId);
@@ -210,7 +191,7 @@
             ViewBag.CityId = 
                 new SelectList(
                     ComboBoxHelpers.
-                    GetCities(), 
+                    GetCities(customer.StateId), 
                     "CityId", 
                     "NameCity", 
                     customer.CityId);
@@ -247,58 +228,41 @@
 
                     var pic = string.Empty;
 
-                    var file = string.Format("{0}.jpg", customer.CustomerID);
+                    var file = string.Format("{0}.jpg", 
+                        customer.CustomerID);
 
-                    var response =
+                    var response0 =
                         FilesHelpers.
                         UploadPhoto(
                         customer.LogoCFile,
                         folder,
                         file);
 
-                    if (response)
+                    if (response0)
                     {
-                        pic = string.Format("{0}/{1}", folder, customer.CustomerID);
+                        pic = string.Format("{0}/{1}", 
+                            folder, customer.CustomerID);
 
                         customer.LogoC = pic;
                     }
 
                 }
 
-                try
-                {
-                    db.SaveChanges();
+                var response = DBHelpers.SaveChanges(db);
 
+                if (response.Succeeded)
+                {
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
-                {
-                    if (ex.InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException != null &&
-                                        ex.InnerException.
-                                        InnerException.Message.
-                                        Contains("_Index"))
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            "You Can't Add a New Record, Because There is Already One");
-                    }
-                    else
-                    {
-                        ModelState.
-                            AddModelError(
-                            string.Empty,
-                            ex.Message);
-                    }
-                }
+
+                ModelState.AddModelError(
+                    string.Empty, response.Message);
             }
 
             ViewBag.CityId = 
                 new SelectList(
                     ComboBoxHelpers.
-                    GetCities(), 
+                    GetCities(customer.StateId), 
                     "CityId", 
                     "NameCity", 
                     customer.CityId);
@@ -342,35 +306,15 @@
 
             db.Customers.Remove(customer);
 
-            try
-            {
-                db.SaveChanges();
+            var response = DBHelpers.SaveChanges(db);
 
+            if (response.Succeeded)
+            {
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null &&
-                    ex.InnerException.
-                    InnerException != null &&
-                    ex.InnerException.
-                    InnerException.Message.
-                    Contains("REFERENCE"))
-                {
-                    ModelState.
-                        AddModelError(
-                        string.Empty,
-                        "The Selected Record can't be Deleted, "
-                        + " Because it Already Contains Related Records");
-                }
-                else
-                {
-                    ModelState.
-                        AddModelError(
-                        string.Empty,
-                        ex.Message);
-                }
-            }
+
+            ModelState.AddModelError(
+                string.Empty, response.Message);
 
             return View(customer);
         }
@@ -385,16 +329,6 @@
             base.Dispose(disposing);
         }
 
-        public JsonResult GetCities(int stateId)
-        {
-            db.Configuration.
-                ProxyCreationEnabled = false;
-
-            var cities =
-                db.Cities.Where(
-                    c => c.StateId == stateId);
-
-            return Json(cities);
-        }
+        
     }
 }
